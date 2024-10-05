@@ -1,0 +1,11 @@
+/home/maccos/Workspace/EcbCurrencyRateGateway/bin/Debug/net8.0/EcbCurrencyRateGateway.deps.json
+/home/maccos/Workspace/EcbCurrencyRateGateway/bin/Debug/net8.0/EcbCurrencyRateGateway.dll
+/home/maccos/Workspace/EcbCurrencyRateGateway/bin/Debug/net8.0/EcbCurrencyRateGateway.pdb
+/home/maccos/Workspace/EcbCurrencyRateGateway/obj/Debug/net8.0/EcbCurrencyRateGateway.GeneratedMSBuildEditorConfig.editorconfig
+/home/maccos/Workspace/EcbCurrencyRateGateway/obj/Debug/net8.0/EcbCurrencyRateGateway.AssemblyInfoInputs.cache
+/home/maccos/Workspace/EcbCurrencyRateGateway/obj/Debug/net8.0/EcbCurrencyRateGateway.AssemblyInfo.cs
+/home/maccos/Workspace/EcbCurrencyRateGateway/obj/Debug/net8.0/EcbCurrencyRateGateway.csproj.CoreCompileInputs.cache
+/home/maccos/Workspace/EcbCurrencyRateGateway/obj/Debug/net8.0/EcbCurrencyRateGateway.dll
+/home/maccos/Workspace/EcbCurrencyRateGateway/obj/Debug/net8.0/refint/EcbCurrencyRateGateway.dll
+/home/maccos/Workspace/EcbCurrencyRateGateway/obj/Debug/net8.0/EcbCurrencyRateGateway.pdb
+/home/maccos/Workspace/EcbCurrencyRateGateway/obj/Debug/net8.0/ref/EcbCurrencyRateGateway.dll
