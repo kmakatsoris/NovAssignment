@@ -62,7 +62,7 @@ Task was to create a library, Worker and a Web API(Wallet) that should communica
 
    - After cloning the project loog the Annotations: @TODO and @ because indicates some useful or explanation details
    - DB configuration on the Cloning Project
-   - DB setup on local machine to confirm the configuration of the Project
+   - DB setup on local machine to confirm the configuration of the Project (Create db user, 2 databases CurrencyRates, Wallet->can find inside Wallet/api/Types/Model)
    - Redis setup at specific(or change) port indicating in Program.cs
 
 2. Clone the repository:
