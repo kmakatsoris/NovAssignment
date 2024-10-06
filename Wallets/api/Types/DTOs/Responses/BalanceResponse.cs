@@ -6,7 +6,7 @@ namespace Wallets.Types.DTOs
     public class BalanceResponse
     {
         [DataMember(Name = "Success")]
-        public bool Success { get; set; } = false;
+        public BasicResponse Success { get; set; } = new BasicResponse();
 
         [DataMember(Name = "Balance")]
         public decimal Balance { get; set; }
