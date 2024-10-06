@@ -62,7 +62,7 @@ Task was to create a library, Worker and a Web API(Wallet) that should communica
 
    - After cloning the project loog the Annotations: @TODO and @ because indicates some useful or explanation details
    - DB configuration on the Cloning Project
-   - DB setup on local machine to confirm the configuration of the Project
+   - DB setup on local machine to confirm the configuration of the Project (Create db user, 2 databases CurrencyRates, Wallet->can find inside Wallet/api/Types/Model)
    - Redis setup at specific(or change) port indicating in Program.cs
 
 2. Clone the repository:
@@ -87,6 +87,9 @@ Task was to create a library, Worker and a Web API(Wallet) that should communica
 5. Open your browser and navigate to `http://localhost:5123/swagger/index.html`.
 
 ## 📸 Screenshots
+![Screenshot from 2024-10-06 19-33-08](https://github.com/user-attachments/assets/afacfe89-e52b-45e7-87bc-366ccfd5cdc3)
+![Screenshot from 2024-10-06 19-33-22](https://github.com/user-attachments/assets/b749e967-f354-4b31-ae2c-0f976e83c084)
+![Screenshot from 2024-10-06 19-33-32](https://github.com/user-attachments/assets/3195854a-2934-41da-afd5-3dd38dbab599)
 
 ## 🤝 Contributing
 
