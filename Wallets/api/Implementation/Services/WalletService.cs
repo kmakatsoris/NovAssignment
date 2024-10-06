@@ -1,3 +1,4 @@
+using CurrencyRateWorkerService.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Wallets.Exceptions;
 using Wallets.Implementation.Context;
@@ -12,10 +13,13 @@ namespace Wallets.Implementation.Services
 {
     public class WalletService : IWalletService
     {
+        private readonly bool EN_CACHE = true;
         private readonly WalletsDbContext _dbContext;
-        public WalletService(WalletsDbContext dbContext)
+        private readonly ICurrencyRateCache _currencyRateCache;
+        public WalletService(WalletsDbContext dbContext, ICurrencyRateCache currencyRateCache)
         {
             _dbContext = dbContext;
+            _currencyRateCache = currencyRateCache;
         }
 
         #region Public Methods
@@ -112,8 +116,16 @@ namespace Wallets.Implementation.Services
         {
             string formattedDate = "2024-10-04"; // DateTime.Now.ToString("yyyy-MM-dd"); @TODO if the api is working and fetch each day data
             DateTime dateTime = DateTime.Parse(formattedDate);
-            CurrencyRates? currencyRate = await _dbContext.CurrencyRates
+            CurrencyRates? currencyRate = null;
+            if (EN_CACHE)
+            {
+                currencyRate = await _currencyRateCache.GetCurrencyRateAsync(toCurrency, dateTime.Date);
+            }
+            else
+            {
+                currencyRate = await _dbContext.CurrencyRates
                 .FirstOrDefaultAsync(cr => cr.Date == dateTime.Date && cr.Currency == toCurrency); // If we want to raise exception if there are more than one items with the same Data we can use Select or ... Thare are other handling options
+            }
 
             if (currencyRate == null) return null;
 

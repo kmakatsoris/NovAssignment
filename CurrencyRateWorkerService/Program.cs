@@ -1,3 +1,4 @@
+using CurrencyRateWorkerService.Interfaces;
 using Serilog;
 
 namespace CurrencyRateWorkerService
@@ -38,7 +39,13 @@ namespace CurrencyRateWorkerService
                 {
                     var connectionString = config.GetConnectionString("DefaultConnection");
                     services.AddSingleton(connectionString ?? "");
+                    services.AddStackExchangeRedisCache(options =>
+                    {
+                        options.Configuration = "localhost:6379";
+                        options.InstanceName = "WalletApp_";
+                    });
                     services.AddHostedService<Worker>();
+                    services.AddScoped<ICurrencyRateCache, RedisCurrencyRateCache>();
                 });
     }
 }

@@ -1,3 +1,4 @@
+using CurrencyRateWorkerService.Interfaces;
 using EcbCurrencyRateGateway.Implementation;
 using EcbCurrencyRateGateway.Models;
 using MySql.Data.MySqlClient;
@@ -5,17 +6,20 @@ using MySql.Data.MySqlClient;
 namespace CurrencyRateWorkerService;
 public class Worker : BackgroundService
 {
+    private readonly bool EN_CACHE = true;
     private readonly ILogger<Worker> _logger;
     private readonly EcbGateway _ecbGateway;
     private readonly int _fetchInterval;
     private readonly string _connectionString;
+    private readonly ICurrencyRateCache _currencyRateCache;
 
-    public Worker(ILogger<Worker> logger, IConfiguration configuration, string connectionString)
+    public Worker(ILogger<Worker> logger, IConfiguration configuration, string connectionString, ICurrencyRateCache currencyRateCache)
     {
         _logger = logger;
         _ecbGateway = new EcbGateway();
         _fetchInterval = configuration.GetValue<int>("Worker:FetchIntervalMinutes");
         _connectionString = connectionString;
+        _currencyRateCache = currencyRateCache;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -62,6 +66,7 @@ public class Worker : BackgroundService
                 */
                 foreach (var rate in rates)
                 {
+                    ExecuteCachingMechanism(rate);
                     var command = new MySqlCommand(@"
                     INSERT INTO CurrencyRates (Date, Currency, Rate)
                     VALUES (@Date, @Currency, @Rate)
@@ -76,6 +81,14 @@ public class Worker : BackgroundService
 
                 await transaction.CommitAsync();
             }
+        }
+    }
+
+    private void ExecuteCachingMechanism(CurrencyRate rate)
+    {
+        if (EN_CACHE == true && rate != null)
+        {
+            _currencyRateCache.SetCurrencyRateAsync(rate);
         }
     }
 

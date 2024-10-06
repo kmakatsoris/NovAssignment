@@ -9,6 +9,7 @@ using Wallets.Implementation.Services;
 using Wallets.Implementation.Context;
 using Microsoft.EntityFrameworkCore;
 using Wallets.Types.Context;
+using CurrencyRateWorkerService.Interfaces;
 
 namespace Portfolio.Core
 {
@@ -45,7 +46,11 @@ namespace Portfolio.Core
                         services.RegisterDbContexts(config);
 
                         // Adding IMemoryCache as Caching Service
-                        services.AddMemoryCache();
+                        services.AddStackExchangeRedisCache(options =>
+                        {
+                            options.Configuration = "localhost:6379";
+                            options.InstanceName = "WalletApp_";
+                        });
 
                         // Register Http Clients,
                         services.RegisterHttpClients(config);
@@ -165,7 +170,7 @@ namespace Portfolio.Core
 
             // Scoped Lifecycle:
             // --------------------------------------------------------------------
-
+            services.AddScoped<ICurrencyRateCache, RedisCurrencyRateCache>();
 
             // Transient Lifecycle:
             // --------------------------------------------------------------------
