@@ -22,8 +22,8 @@
 **/*.sln.iml
 
 # ASP.NET Core
-**/appsettings*.json
-**/appsettings.*.json
+#**/appsettings*.json
+#**/appsettings.*.json
 **/*.db
 **/*.sqlite
 
