@@ -6,6 +6,8 @@ namespace CurrencyRateWorkerService.Interfaces
     {
         Task<CurrencyRates?> GetCurrencyRateAsync(string currency, DateTime date);
         Task SetCurrencyRateAsync(CurrencyRates rate);
+        Task<RateLimiting?> GetRateLimitingAsync(string ip);
+        Task SetRateLimitingAsync(RateLimiting rate);
     }
 
 }

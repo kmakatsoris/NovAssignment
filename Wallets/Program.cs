@@ -10,6 +10,7 @@ using Wallets.Implementation.Context;
 using Microsoft.EntityFrameworkCore;
 using Wallets.Types.Context;
 using CurrencyRateWorkerService.Interfaces;
+using Wallets.Middlewares;
 
 namespace Portfolio.Core
 {
@@ -82,6 +83,10 @@ namespace Portfolio.Core
                         {
                             c.SwaggerEndpoint("/swagger/v1/swagger.json", "Wallet.Core.V1");
                         });
+
+                        // Register Middleware,
+                        var serviceProvider = app.ApplicationServices;
+                        app.RegisterMiddlewares(serviceProvider);
 
                         app.UseEndpoints(endpoints =>
                         {
@@ -166,11 +171,10 @@ namespace Portfolio.Core
             // Singleton Lifecycle:
             // --------------------------------------------------------------------
             services.AddSingleton<ILogger, Logger>(x => logger);
-
+            services.AddSingleton<ICurrencyRateCache, RedisCurrencyRateCache>();
 
             // Scoped Lifecycle:
-            // --------------------------------------------------------------------
-            services.AddScoped<ICurrencyRateCache, RedisCurrencyRateCache>();
+            // --------------------------------------------------------------------            
 
             // Transient Lifecycle:
             // --------------------------------------------------------------------
@@ -178,5 +182,16 @@ namespace Portfolio.Core
         }
         #endregion
 
+
+        #region Register Middlewares,
+        private static void RegisterMiddlewares(this IApplicationBuilder app, IServiceProvider serviceProvider)
+        {
+            app.UseMiddleware<RateLimitingMiddleware>(new RateLimitingMiddlewareOptions
+            {
+                Logger = serviceProvider.GetService<ILogger>(),
+                CurrencyRateCache = serviceProvider.GetService<ICurrencyRateCache>()
+            });
+        }
+        #endregion
     }
 }
