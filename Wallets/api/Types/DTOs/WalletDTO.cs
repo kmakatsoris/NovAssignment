@@ -1,19 +1,19 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace Wallets.Types.Models
 {
-    public class Wallet
+    [DataContract]
+    public class WalletDTO
     {
-        [Key]
+        [DataMember(Name = "Id")]
         public long Id { get; set; }
 
-        [Required]
-        [Column(TypeName = "decimal(18,2)")]
+        [DataMember(Name = "Balance")]
         public decimal Balance { get; set; }
 
-        [Required]
-        [StringLength(3)]
+        [DataMember(Name = "Currency")]
         public string Currency { get; set; } = "";
     }
 }
