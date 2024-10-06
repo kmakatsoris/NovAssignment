@@ -87,6 +87,9 @@ Task was to create a library, Worker and a Web API(Wallet) that should communica
 5. Open your browser and navigate to `http://localhost:5123/swagger/index.html`.
 
 ## 📸 Screenshots
+![Screenshot from 2024-10-06 19-33-08](https://github.com/user-attachments/assets/afacfe89-e52b-45e7-87bc-366ccfd5cdc3)
+![Screenshot from 2024-10-06 19-33-22](https://github.com/user-attachments/assets/b749e967-f354-4b31-ae2c-0f976e83c084)
+![Screenshot from 2024-10-06 19-33-32](https://github.com/user-attachments/assets/3195854a-2934-41da-afd5-3dd38dbab599)
 
 ## 🤝 Contributing
 
